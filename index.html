@@ -1,0 +1,167 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+
+
+    <section class="Keyboard">
+
+        <div class="container">
+
+            <div class="guitar">
+
+                <div data-key="65" class="key">
+                    <span class="sound">A SOUND</span>
+                </div>
+                <div data-key="66" class="key">
+                    <span class="sound">B SOUND</span>
+                </div>
+                <div data-key="67" class="key">
+                    <span class="sound">C SOUND</span>
+                </div>
+                <div data-key="68" class="key">
+                    <span class="sound">D SOUND</span>
+                </div>
+                <div data-key="69" class="key">
+                    <span class="sound">E SOUND</span>
+                </div>
+                <div data-key="70" class="key">
+                    <span class="sound">F SOUND</span>
+                </div>
+                <div data-key="71" class="key">
+                    <span class="sound">G SOUND</span>
+                </div>
+
+            </div>
+
+            <div class="historic-data">
+                <form>
+                    <div class="data-info">
+                        <div>
+                            <span>YOUR NOTES:</span><br><br>
+                            <input type="text" name="noters" value="" placeholder="ABCDEFG..." id="song-lyrics">
+                            <br><br>
+                        </div>
+                        <div>
+                            <span>YOUR TIMER:</span><br><br>
+                            <input type="number" name="timer" value="0" placeholder="0 - 1" id="song-timer" min="0" max="1" step="0.1">
+                            <br><br>
+                        </div>
+                    </div>
+                    <input type="submit" value="Play" id="play-song">
+                    <input type="submit" value="Reset" id="reset-song">
+                </form>
+            </div>
+
+        </div>
+
+
+
+        <audio data-key="65" src="./Sounds/A.mp3"></audio>
+        <audio data-key="66" src="./Sounds/B.mp3"></audio>
+        <audio data-key="67" src="./Sounds/C.mp3"></audio>
+        <audio data-key="68" src="./Sounds/D.mp3"></audio>
+        <audio data-key="69" src="./Sounds/E.mp3"></audio>
+        <audio data-key="70" src="./Sounds/F.mp3"></audio>
+        <audio data-key="71" src="./Sounds/G.mp3"></audio>
+        <audio data-key="99" src="./Sounds/drum_bass.wav"></audio>
+    </section>
+
+
+    <script>
+
+        let keyNotes = {
+            "A": 65,
+            "B": 66,
+            "C": 67,
+            "D": 68,
+            "F": 69,
+            "E": 70,
+            "G": 71,
+        }
+
+        
+        function removeTransition(e) {
+            if (e.propertyName !== 'transform') return;
+            e.target.classList.remove('playing');
+        }
+
+        function playSound(e) {
+            const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
+            const key = document.querySelector(`div[data-key="${e.keyCode}"]`);
+            if (!audio) return;
+            key.classList.add('playing');
+            audio.currentTime = 0;
+            audio.play();
+        }
+        const keys = Array.from(document.querySelectorAll('.key'));
+        keys.forEach(key => key.addEventListener('transitionend', removeTransition));
+        window.addEventListener('keydown', playSound);
+
+
+        function createSong(e) {
+            e.forEach(x => console.log(x));
+        }
+
+        //when any keyboard is touched this receive the information of that particular key.
+        
+        document.addEventListener('click', function (event) {
+            event.preventDefault();
+
+        (event.target.id == 'reset-song')? document.getElementById("song-lyrics").value = "":"";
+
+               if (event.target.id == 'play-song') {
+              
+                let interval = 800;
+                let mySong = document.getElementById("song-lyrics").value.toUpperCase().split("");
+                let timer = document.getElementById("song-timer").value;
+                mySong.forEach((x, index = 1000)=>{
+
+                    setTimeout(function () {
+
+                        const audio = document.querySelector(`audio[data-key="${keyNotes[x]}"]`);
+                        const key = document.querySelector(`div[data-key="${keyNotes[x]}"]`);
+                        interval = 2;
+                        if (!audio) {
+                            console.log("no note");
+                            document.querySelector(`audio[data-key="99"]`).play();
+                            interval = interval/8;
+                        } else {
+                            key.classList.add('playing');
+                            audio.currentTime = timer;
+                            audio.play();
+                        };
+
+                    }, index * interval);
+
+
+                });
+
+
+
+
+
+            } else {
+                console.log(event.target);
+            }
+
+
+        })
+
+
+
+
+    </script>
+
+</body>
+
+</html>

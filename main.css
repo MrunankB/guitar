@@ -1,0 +1,104 @@
+
+html {
+    font-size: 16px;
+    background-image: linear-gradient(rgba(12, 12, 71, 0.26),rgb(43, 43, 245)), url(https://img.apmcdn.org/a65e6da9c8dbe98f9cab10e67b085cc31ae6878b/uncropped/c45355-20181130-brandi-carlile-in-concert-at-the-state-theatre-in-minneapolis-04.jpg) ;
+    background-size: cover;
+    height: 100vh;
+    color:white;
+  }
+
+ 
+
+.key {
+
+    color:green;
+    transition: all 0.2s;
+    width: 20%;
+    margin:20px;
+    
+    
+}
+
+.playing {
+    transform:scale(2);
+    border-color:orange;
+    box-shadow: 0 0 10px gold;
+}
+
+
+.container{
+
+    width: 50%;
+    margin: 20rem auto;
+}
+
+.guitar{
+
+margin:auto;
+display: flex;
+ 
+}
+
+.historic-data form{
+
+margin: 40px auto;
+width: 50%;
+text-align: center;
+
+}
+
+.data-info{
+
+    
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+}
+
+.key, a,input[type="submit"]{
+    font-size: 0.8rem;
+    display: inline-block;
+    background-color: transparent;
+    padding:0.35em 1.2em;
+    border: 0.1rem solid #ffffff;
+    margin: 0 0.3rem 0.3rem 0;
+    border-radius: 0.12rem;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: #ffffff;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.key:hover,a:hover,input[type="submit"]:hover{
+ color:GOLD;
+ background-color:rgb(19, 1, 1);
+
+}
+
+
+@keyframes guitar {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+#animate-area	{ 
+	width: 100vh; 
+	height: 100vh; 
+	background-image: url(img/guitar1.png);
+	background-position: 0px 0px;
+    background-repeat: repeat;
+    background-size: 10%;
+
+	animation: guitar  10s linear infinite;
+}
+
+
+input#song-lyrics , input#song-timer {
+    background: transparent;
+    border: 1px solid white;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    width: 88%;
+    padding: 1rem;
+}
